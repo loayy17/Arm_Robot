@@ -41,11 +41,9 @@ class ImagePublisher(Node):
         inside_arm = 0.#initial value for second joint as float value
         rl_r1 = 0.#initial value for third joint as float value
         rl_l1 = 0.
+        
+        
 # Initialize the webcam
-        
-        
-
-        
         while True:
             # Read each frame from the webcam
             _, frame = self.video.read()
@@ -55,6 +53,7 @@ class ImagePublisher(Node):
             msg_str.name = ['base_inside', 'inside_arm', 'rl_r1' ,'rl_l1'] #called names of joints
             msg_str.velocity = [] 
             msg_str.effort = []
+        
             # Flip the frame vertically
             frame = cv2.flip(frame, 1)
             framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -93,6 +92,7 @@ class ImagePublisher(Node):
                 if inside_arm <-3.14:
                     inside_arm =-3.14 
                 print(inside_arm)
+            
             if className=='peace':
                 print("cw") 
                 inside_arm += 0.3
@@ -100,6 +100,7 @@ class ImagePublisher(Node):
                 if inside_arm >0:
                     inside_arm =0 
                 print(inside_arm)  
+            
             if className=='rock':
                 print("close_gripper") 
                 rl_r1 -= 0.1 
@@ -111,6 +112,7 @@ class ImagePublisher(Node):
                     rl_l1 =0.523
                 print(rl_r1)  
                 print(rl_l1) 
+            
             if className=='stop':
                 print("open_gripper")
                 rl_r1 += 0.1 
@@ -122,6 +124,7 @@ class ImagePublisher(Node):
                     rl_l1 =0
                 print(rl_r1)  
                 print(rl_l1) 
+            
             if className=='thumbs up':     
                 print("Up")
                 base_inside += 0.05 
@@ -129,6 +132,7 @@ class ImagePublisher(Node):
                 if base_inside >0.25:
                     base_inside =0.25 
                 print(base_inside)
+            
             if className=='thumbs down': 
                 print("down")
                 base_inside -= 0.05 
@@ -136,6 +140,7 @@ class ImagePublisher(Node):
                 if base_inside <0:
                     base_inside =0 
                 print(base_inside)
+            # Not used 
             if className=="fist":
                 className=""
             if className=="smile":
